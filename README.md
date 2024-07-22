@@ -23,8 +23,7 @@ Taking CIFAR-10 as an example, the codes are shown as follows:
 - CIFAR-10-TinyFF: ``python Others/FF/main.py ``
 
 
-> the parameters `dataset` need to be changed accordingly.
-
+> the parameters `dataset` need to be changed accordingly. We acknowledge the following repositories [DRTP](https://github.com/ChFrenkel/DirectRandomTargetProjection), [PEPITA](https://github.com/GiorgiaD/PEPITA) and [FF](https://github.com/loeweX/Forward-Forward).
 
 
 ## References

@@ -8,7 +8,7 @@ input:
   batch_size: 100
   dataset: "cifar10" # "mnist" or "cifar10" or "cifar100",or mitbih
   class_num: 10 #cifar100 100
-  label_weight: 1 #mnist-1, cifar10-5, mitbih-1
+  label_weight: 5 #mnist-1, cifar10-5, mitbih-1
   binary_w: 1
   binary_g: 0
   binary_a: 1
