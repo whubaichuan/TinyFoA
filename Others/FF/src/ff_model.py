@@ -51,25 +51,19 @@ class BinarizeLinear(nn.Linear):
         self.hidden_size = hidden_size
         self.binary_a = binary_a
     def forward(self, input):
-        if self.binary_a ==1:
-            if self.layer_index ==1:
-                input_b=input
-            else:
-                input_b=binarized(input)
-        else:
-            input_b=input
-        #input_b=input
+
+        input_b=input
         weight_b=binarized(self.weight)
 
         out = nn.functional.linear(input_b,weight_b)
         if not self.bias is None:
             self.bias.org=self.bias.data.clone()
             out += self.bias.view(1, -1).expand_as(out)
-        # if self.binary_a ==1:
-        #     return binarized(out)
-        # else:
-        #     return out
-        return out
+        if self.binary_a ==1:
+            return binarized(out)
+        else:
+            return out
+
 
 
 

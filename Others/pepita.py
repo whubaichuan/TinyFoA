@@ -117,10 +117,10 @@ if dataset==1:
     output_size = 28  # Desired output size after all layers
     classes = 10
     if binary_a==1:
-        learning_rate = 0.001
+        learning_rate = 0.0005
     elif binary_a ==0:
-        learning_rate = 0.01
-    #learning_rate = 0.001
+        learning_rate = 0.001
+
     print('Dataset: mnist')
     print('learning_rate',learning_rate)
     train_loader, test_loader = MNIST_loaders()
@@ -145,12 +145,12 @@ elif dataset==3:
 elif dataset ==5:
     input_size =math.ceil(169)
     classes = 5
-    learning_rate = 0.001
+    learning_rate = 0.0001
     print('Dataset: MITBIH')
     print('learning_rate',learning_rate)
     train_loader, test_loader= MITBIH_loaders()
 
-layers = [input_size, 1024,1024,1024]
+layers = [input_size, 2000,2000,2000]
 
 class Binarize(InplaceFunction):
 
@@ -197,13 +197,8 @@ class BinarizeLinear(nn.Linear):
         self.hidden_size = hidden_size
         self.binary_a = binary_a
     def forward(self, input):
-        if self.binary_a ==1:
-            if self.layer_index ==1:
-                input_b=input
-            else:
-                input_b=binarized(input)
-        else:
-            input_b=input
+
+        input_b=input
 
         weight_b=binarized(self.weight)
 
@@ -211,7 +206,11 @@ class BinarizeLinear(nn.Linear):
         if not self.bias is None:
             self.bias.org=self.bias.data.clone()
             out += self.bias.view(1, -1).expand_as(out)
-        return out
+            
+        if self.binary_a ==1:
+            return binarized(out)
+        else:
+            return out
 
 
 class NetFC1x1024DOcust(nn.Module):

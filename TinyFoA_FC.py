@@ -237,11 +237,6 @@ for layer_index in range(layers):
         if name =='lastfc.weight' or name=='lastfc.bias':
             param.requires_grad = False
 
-    # print(new_model)
-    # for name, param in new_model.named_parameters():
-    #     print(f"Parameter: {name}, Requires Gradient: {param.requires_grad}")
-    # print(new_model.lastfc.weight.data)
-    # print(new_model.lastfc.bias.data)
             
     if initialization==1:
         fixed_weights = torch.randn((class_num,length))
@@ -265,10 +260,7 @@ for layer_index in range(layers):
 
     
     new_model.lastfc.bias.data = torch.zeros((class_num)).to(device)
-    #new_model.lastfc.bias.data = torch.randn((class_num))
 
-    # for module in new_model.modules():
-    #     module.register_backward_hook(binary_backward_hook)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(new_model.parameters(), lr=learning_rate)

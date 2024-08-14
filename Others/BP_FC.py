@@ -12,7 +12,7 @@ import math
 
    
 #dataset: 1-mnist,2-cifar10,3-cifar100,5-mitbih
-dataset = 1
+dataset = 2
 #binary: 0-no binary, 1-binary
 binary_w=1
 binary_g=0
@@ -191,22 +191,19 @@ class BinarizeLinear(nn.Linear):
         self.hidden_size = hidden_size
         self.binary_a = binary_a
     def forward(self, input):
-        if self.binary_a ==1:
-            if self.layer_index ==1:
-                input_b=input
-            else:
-                input_b=binarized(input)
-        else:
-            input_b=input
 
+        input_b=input
         weight_b=binarized(self.weight)
 
         out = nn.functional.linear(input_b,weight_b)
         if not self.bias is None:
             self.bias.org=self.bias.data.clone()
             out += self.bias.view(1, -1).expand_as(out)
-
-        return out
+            
+        if self.binary_a ==1:
+            return binarized(out)
+        else:
+            return out
 
 
 class Net(nn.Module):
@@ -321,4 +318,4 @@ for layer_number in range(3,4):
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
 
-        print('Accuracy of the network on the 10000 test images: {} %'.format(100 * correct / total))
+        print('Accuracy of the network on test images: {} %'.format(100 * correct / total))

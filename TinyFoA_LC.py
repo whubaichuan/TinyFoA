@@ -20,7 +20,7 @@ start_time = datetime.datetime.now()
 dataset = 1
 print('dataset: '+str(dataset))
 epcoh_number=200
-layer_channels = [16,32,64] #3
+layer_channels = [16,32,64,64] #4
 num_layers = len(layer_channels)
 kernel_size = 3
 stride = 1
@@ -225,8 +225,7 @@ class LocallyConnected2d_binary(nn.Module):
         out = (x.unsqueeze(1) * binarized(self.weight)).sum([2, -1])
         if self.bias is not None:
             out += self.bias
-        #return self.dropout(F.relu(self.bn(out)))
-        #return self.dropout(F.relu(out))
+
         #return F.relu(self.bn(out))
         return binarized(F.relu(self.bn(out)))
 
@@ -368,7 +367,7 @@ for index in range(num_layers):
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
 
-        print('Accuracy of the network on the 10000 test images: {} %'.format(100 * correct / total))
+        print('Accuracy of the network on test images: {} %'.format(100 * correct / total))
 
 end_time = datetime.datetime.now()
 total_time = (end_time-start_time).total_seconds()

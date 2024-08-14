@@ -17,10 +17,10 @@ from torch.autograd.function  import Function, InplaceFunction
 
 start_time = datetime.datetime.now()
 #dataset: 1-mnist,2-cifar10,3-cifar100,5-mitbih
-dataset = 1
+dataset = 2
 print('dataset: '+str(dataset))
 epcoh_number=200
-layer_channels = [16,32,64] #3
+layer_channels = [16,32,64,64] #4
 print(layer_channels)
 num_layers = len(layer_channels)
 kernel_size = 3
