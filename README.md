@@ -1,4 +1,4 @@
-# TinyFoA: Memory Efficient Forward-Only Algorithm for On-Device Learning
+# TinyFoA: Memory Efficient Forward-Only Algorithm for On-Device Learning (Acccepted by AAAI 2025)
 
 This repository provides the reproducible code for all the reported results in the paper **TinyFoA: Memory Efficient Forward-Only Algorithm for On-Device Learning**.
 
