@@ -47,5 +47,5 @@ Taking CIFAR-10 as an example, the codes are shown as follows:
     year={2025}, 
     month={Apr.}, 
     pages={17377-17385}
-    }
+}
 ```
